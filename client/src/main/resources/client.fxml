@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox alignment="center" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="Controller">
+
+    <HBox VBox.vgrow="ALWAYS">
+        <VBox HBox.hgrow="ALWAYS">
+            <HBox fx:id="localPanel" spacing="5">
+                <Button maxWidth="Infinity"  text="Send file to Cloud"
+                        HBox.hgrow="ALWAYS"/>
+                <padding>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                </padding>
+            </HBox>
+            <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="Infinity" text="Local Storage"
+                   textAlignment="CENTER">
+            </Label>
+            <TableView fx:id="localFilesTable" VBox.vgrow="ALWAYS"/>
+        </VBox>
+        <VBox HBox.hgrow="ALWAYS">
+            <HBox fx:id="cloudPanel" spacing="5">
+                <Button maxWidth="Infinity"  text="Download" HBox.hgrow="ALWAYS"/>
+                <padding>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                </padding>
+            </HBox>
+            <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="Infinity" text="Cloud Storage"
+                   textAlignment="CENTER">
+            </Label>
+            <TableView fx:id="cloudFilesTable" VBox.vgrow="ALWAYS"/>
+        </VBox>
+    </HBox>
+</VBox>
