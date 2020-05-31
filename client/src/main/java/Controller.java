@@ -9,6 +9,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -31,6 +32,10 @@ public class Controller implements Initializable {
                         Files.write(Paths.get(localStoragePath + fm.getFilename()), fm.getData(), StandardOpenOption.CREATE);
                         updateLocalFilesList();
                     }
+                    if (am instanceof UpdateCloudMessage) {
+                        UpdateCloudMessage updateCloudMessage = (UpdateCloudMessage) am;
+                        updateCloudFilesList(updateCloudMessage.getCloudFileList());
+                    }
                 }
             } catch (ClassNotFoundException | IOException e) {
                 e.printStackTrace();
@@ -40,6 +45,8 @@ public class Controller implements Initializable {
         });
         t.setDaemon(true);
         t.start();
+        updateLocalFilesList();
+        Network.sendMsg(new UpdateCloudMessage());
     }
 
     private void updateLocalFilesList() {
@@ -50,6 +57,13 @@ public class Controller implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        });
+    }
+
+    private void updateCloudFilesList(ArrayList<String> filesList) {
+        updateUI(() -> {
+            cloudFilesList.getItems().clear();
+            cloudFilesList.getItems().addAll(filesList);
         });
     }
 
@@ -67,5 +81,9 @@ public class Controller implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void btnDownload(ActionEvent actionEvent) {
+        Network.sendMsg(new DownloadRequest(cloudFilesList.getSelectionModel().getSelectedItem()));
     }
 }
