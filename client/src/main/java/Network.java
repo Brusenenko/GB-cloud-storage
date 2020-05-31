@@ -41,5 +41,18 @@ public class Network {
         }
     }
 
+    public static AbstractMessage readObject() throws ClassNotFoundException, IOException {
+        Object obj = in.readObject();
+        return (AbstractMessage) obj;
+    }
 
+    static boolean sendMsg(AbstractMessage msg) {
+        try {
+            out.writeObject(msg);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
