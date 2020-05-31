@@ -18,7 +18,7 @@
             <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="Infinity" text="Local Storage"
                    textAlignment="CENTER">
             </Label>
-            <TableView fx:id="localFilesTable" VBox.vgrow="ALWAYS"/>
+            <ListView fx:id="localFilesList" VBox.vgrow="ALWAYS"/>
         </VBox>
         <VBox HBox.hgrow="ALWAYS">
             <HBox fx:id="cloudPanel" spacing="5">
@@ -30,7 +30,7 @@
             <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="Infinity" text="Cloud Storage"
                    textAlignment="CENTER">
             </Label>
-            <TableView fx:id="cloudFilesTable" VBox.vgrow="ALWAYS"/>
+            <ListView fx:id="cloudFilesTable" VBox.vgrow="ALWAYS"/>
         </VBox>
     </HBox>
 </VBox>
