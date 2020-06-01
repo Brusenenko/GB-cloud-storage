@@ -86,4 +86,17 @@ public class Controller implements Initializable {
     public void btnDownload(ActionEvent actionEvent) {
         Network.sendMsg(new DownloadRequest(cloudFilesList.getSelectionModel().getSelectedItem()));
     }
+
+    public void btnDeleteFromCloud(ActionEvent actionEvent) {
+        Network.sendMsg(new DeleteRequest(cloudFilesList.getSelectionModel().getSelectedItem()));
+    }
+
+    public void btnDeleteFromLocalStorage(ActionEvent actionEvent) {
+        try {
+            Files.delete(Paths.get(localStoragePath + localFilesList.getSelectionModel().getSelectedItem()));
+            updateLocalFilesList();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
