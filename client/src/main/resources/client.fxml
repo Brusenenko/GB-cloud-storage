@@ -9,8 +9,8 @@
     <HBox VBox.vgrow="ALWAYS">
         <VBox HBox.hgrow="ALWAYS">
             <HBox fx:id="localPanel" spacing="5">
-                <Button maxWidth="Infinity" onAction="#btnUpload" text="Send file to Cloud"
-                        HBox.hgrow="ALWAYS"/>
+                <Button maxWidth="Infinity" onAction="#btnUpload" text="Send file to Cloud" HBox.hgrow="ALWAYS"/>
+                <Button maxWidth="Infinity" onAction="#btnDeleteFromLocalStorage" text="Delete" HBox.hgrow="ALWAYS"/>
                 <padding>
                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                 </padding>
@@ -23,6 +23,8 @@
         <VBox HBox.hgrow="ALWAYS">
             <HBox fx:id="cloudPanel" spacing="5">
                 <Button maxWidth="Infinity" onAction="#btnDownload" text="Download" HBox.hgrow="ALWAYS"/>
+                <Button maxWidth="Infinity" onAction="#btnDeleteFromCloud" text="Delete" HBox.hgrow="ALWAYS"/>
+
                 <padding>
                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                 </padding>

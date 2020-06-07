@@ -33,7 +33,11 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
             }
             if (message instanceof UpdateCloudMessage) {
                 updateCloudListView(ctx);
-
+            }
+            if (message instanceof DeleteRequest) {
+                DeleteRequest deleteRequest = (DeleteRequest) message;
+                Files.delete(Paths.get(cloudStoragePath + deleteRequest.getFilename()));
+                updateCloudListView(ctx);
             }
         } finally {
             ReferenceCountUtil.release(message);
