@@ -7,6 +7,7 @@ import java.net.Socket;
 public class Network {
     private final static int PORT = 8181;
     private final static String HOST = "localhost";
+    private static final int MAX_OBJ_SIZE = 500 * 1024 * 1024;
 
     private static Socket socket;
     static ObjectDecoderInputStream in;
@@ -16,7 +17,7 @@ public class Network {
         try {
             socket = new Socket(HOST, PORT);
             out = new ObjectEncoderOutputStream(socket.getOutputStream());
-            in = new ObjectDecoderInputStream(socket.getInputStream());
+            in = new ObjectDecoderInputStream(socket.getInputStream(), MAX_OBJ_SIZE);
 
         } catch (IOException e) {
             e.printStackTrace();

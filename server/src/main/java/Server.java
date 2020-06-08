@@ -8,9 +8,11 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
+import io.netty.handler.stream.ChunkedWriteHandler;
 
 public class Server {
-    private final static int PORT = 8181;
+    private static final int PORT = 8181;
+    private static final int MAX_OBJ_SIZE = 500 * 1024 * 1024; // максимальный размер перекачиваемого файла
 
     private void run() throws Exception {
         EventLoopGroup mainGroup = new NioEventLoopGroup();
@@ -22,8 +24,10 @@ public class Server {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             socketChannel.pipeline().addLast(
-                                    new ObjectDecoder(ClassResolvers.cacheDisabled(null)),
+                                    new ObjectDecoder(MAX_OBJ_SIZE, ClassResolvers.cacheDisabled(null)),
                                     new ObjectEncoder(),
+                                    new ChunkedWriteHandler(), // Умеет передавать большие файлы
+                                    // попробую реализовать к следующему CodeReview
                                     new ServerHandler()
                             );
                         }
